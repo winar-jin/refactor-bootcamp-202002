@@ -1,5 +1,6 @@
 package cc.xpbootcamp.warmup.cashier;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public class Order {
@@ -25,20 +26,17 @@ public class Order {
         return lineItems;
     }
 
-    public double totalSalesTax() {
+    public BigDecimal totalSalesTax() {
         // calculate sales tax @ rate of 10%
         return lineItems.stream()
-                        .map(lineItem -> lineItem.totalAmount() * .10)
-                        .mapToDouble(Double::doubleValue)
-                        .sum();
+                        .map(lineItem -> lineItem.totalAmount().multiply(BigDecimal.valueOf(.10)))
+                        .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 
-    public double totalAmountWithTax() {
-        double totalAmount = lineItems.stream()
-                                      .map(LineItem::totalAmount)
-                                      .mapToDouble(Double::doubleValue)
-                                      .sum();
-        return totalAmount + totalSalesTax();
-
+    public BigDecimal totalAmountWithTax() {
+        BigDecimal totalAmount = lineItems.stream()
+                                          .map(LineItem::totalAmount)
+                                          .reduce(BigDecimal.ZERO, BigDecimal::add);
+        return totalAmount.add(totalSalesTax());
     }
 }

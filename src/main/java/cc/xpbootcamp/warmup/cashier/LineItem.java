@@ -1,13 +1,15 @@
 package cc.xpbootcamp.warmup.cashier;
 
+import java.math.BigDecimal;
+
 public class LineItem {
 	private String description;
-	private double price;
+	private BigDecimal price;
 	private int quantity;
 
 	public LineItem(String description, double price, int quantity) {
 		this.description = description;
-		this.price = price;
+		this.price = BigDecimal.valueOf(price);
 		this.quantity = quantity;
 	}
 
@@ -15,7 +17,7 @@ public class LineItem {
 		return description;
 	}
 
-	public double getPrice() {
+	public BigDecimal getPrice() {
 		return price;
 	}
 
@@ -23,7 +25,7 @@ public class LineItem {
 		return quantity;
 	}
 
-    double totalAmount() {
-        return price * quantity;
+    BigDecimal totalAmount() {
+        return price.multiply(BigDecimal.valueOf(quantity));
     }
 }
