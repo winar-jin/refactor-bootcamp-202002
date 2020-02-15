@@ -3,6 +3,9 @@ package cc.xpbootcamp.warmup.fibonacci;
 public class Fibonacci {
 
     public int calculate(int position) {
-        return 1;
+        if (position == 1 || position == 2) {
+            return 1;
+        }
+        return 2;
     }
 }
