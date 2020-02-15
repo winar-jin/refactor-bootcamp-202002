@@ -1,11 +1,21 @@
 package cc.xpbootcamp.warmup.fibonacci;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Fibonacci {
 
+    private Map<Integer, Long> results = new HashMap<Integer, Long>() {{
+        put(1, 1L);
+        put(2, 1L);
+    }};
+
     public long calculate(int position) {
-        if (position == 1 || position == 2) {
-            return 1;
+        int startPosition = 3;
+        while (startPosition <= position) {
+            results.put(startPosition, results.get(startPosition - 1) + results.get(startPosition - 2));
+            startPosition++;
         }
-        return this.calculate(position - 1) + this.calculate(position - 2);
+        return results.get(position);
     }
 }
