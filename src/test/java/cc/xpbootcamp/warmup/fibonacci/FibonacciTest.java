@@ -35,4 +35,11 @@ class FibonacciTest {
         int result = fibonacci.calculate(3);
         Assertions.assertEquals(2, result);
     }
+
+    @DisplayName("当求斐波那契数列的第 4 位时, 返回 3")
+    @Test
+    void should_return_3_when_calculate_given_position_is_4() {
+        int result = fibonacci.calculate(4);
+        Assertions.assertEquals(3, result);
+    }
 }

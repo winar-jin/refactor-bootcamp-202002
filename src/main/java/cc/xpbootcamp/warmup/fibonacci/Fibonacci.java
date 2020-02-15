@@ -6,6 +6,6 @@ public class Fibonacci {
         if (position == 1 || position == 2) {
             return 1;
         }
-        return 2;
+        return this.calculate(position - 1) + this.calculate(position - 2);
     }
 }
