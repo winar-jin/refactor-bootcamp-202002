@@ -24,4 +24,21 @@ public class Order {
     public List<LineItem> getLineItems() {
         return lineItems;
     }
+
+    public double totalSalesTax() {
+        // calculate sales tax @ rate of 10%
+        return lineItems.stream()
+                        .map(lineItem -> lineItem.totalAmount() * .10)
+                        .mapToDouble(Double::doubleValue)
+                        .sum();
+    }
+
+    public double totalAmountWithTax() {
+        double totalAmount = lineItems.stream()
+                                      .map(LineItem::totalAmount)
+                                      .mapToDouble(Double::doubleValue)
+                                      .sum();
+        return totalAmount + totalSalesTax();
+
+    }
 }

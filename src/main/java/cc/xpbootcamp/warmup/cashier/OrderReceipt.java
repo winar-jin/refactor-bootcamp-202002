@@ -5,7 +5,6 @@ package cc.xpbootcamp.warmup.cashier;
  * price and amount. It also calculates the sales tax @ 10% and prints as part
  * of order. It computes the total order amount (amount of individual lineItems +
  * total sales tax) and prints it.
- *
  */
 public class OrderReceipt {
     private Order order;
@@ -25,31 +24,20 @@ public class OrderReceipt {
         output.append(order.getCustomerAddress());
 
         // prints lineItems
-        double totalSalesTax = 0d;
-        double totalAmount = 0d;
         for (LineItem lineItem : order.getLineItems()) {
-            output.append(lineItem.getDescription());
-            output.append('\t');
-            output.append(lineItem.getPrice());
-            output.append('\t');
-            output.append(lineItem.getQuantity());
-            output.append('\t');
-            output.append(lineItem.totalAmount());
-            output.append('\n');
-
-            // calculate sales tax @ rate of 10%
-            double salesTax = lineItem.totalAmount() * .10;
-            totalSalesTax += salesTax;
-
-            // calculate total amount of lineItem = price * quantity + 10 % sales tax
-            totalAmount += lineItem.totalAmount() + salesTax;
+            output.append(lineItemInformation(lineItem));
         }
 
-        // prints the state tax
-        output.append("Sales Tax").append('\t').append(totalSalesTax);
+        // prints the sales tax
+        output.append("Sales Tax").append('\t').append(order.totalSalesTax());
 
-        // print total amount
-        output.append("Total Amount").append('\t').append(totalAmount);
+        // print total amount with tax
+        output.append("Total Amount").append('\t').append(order.totalAmountWithTax());
+
         return output.toString();
+    }
+
+    private String lineItemInformation(LineItem lineItem) {
+        return String.format("%s\t%.1f\t%s\t%.1f\n", lineItem.getDescription(), lineItem.getPrice(), lineItem.getQuantity(), lineItem.totalAmount());
     }
 }
