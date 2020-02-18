@@ -19,10 +19,6 @@ public class OrderReceipt {
         // print headers
         output.append("======Printing Orders======\n");
 
-        // print customer name, customer address
-        output.append(order.getCustomerName());
-        output.append(order.getCustomerAddress());
-
         // prints lineItems
         for (LineItem lineItem : order.getLineItems()) {
             output.append(lineItemInformation(lineItem));

@@ -7,18 +7,18 @@ import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
+import static org.junit.Assert.assertFalse;
 
 class OrderReceiptTest {
     @Test
-    void shouldPrintCustomerInformationOnOrder() {
-        Order order = new Order("Mr X", "Chicago, 60601", new ArrayList<LineItem>());
+    void shouldNotPrintCustomerInformationOnOrder() {
+        Order order = new Order("Mr X", "Chicago, 60601", new ArrayList<>());
         OrderReceipt receipt = new OrderReceipt(order);
 
         String output = receipt.printReceipt();
 
-
-        assertThat(output, containsString("Mr X"));
-        assertThat(output, containsString("Chicago, 60601"));
+        assertFalse(output.contains("Mr X"));
+        assertFalse(output.contains("Chicago, 60601"));
     }
 
     @Test
