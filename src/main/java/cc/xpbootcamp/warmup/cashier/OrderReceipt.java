@@ -17,12 +17,14 @@ public class OrderReceipt {
         StringBuilder output = new StringBuilder();
 
         // print headers
-        output.append("======Printing Orders======\n");
+        output.append("===== 老王超市,值得信赖 ======\n");
 
         // prints lineItems
         for (LineItem lineItem : order.getLineItems()) {
             output.append(lineItemInformation(lineItem));
         }
+
+        output.append("-------------------------\n");
 
         // prints the sales tax
         output.append("Sales Tax").append('\t').append(order.totalSalesTax());

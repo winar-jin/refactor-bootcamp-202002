@@ -22,6 +22,17 @@ class OrderReceiptTest {
     }
 
     @Test
+    public void shouldPrintTitleAndDividerInEachOrderReceipt() {
+        Order order = new Order(null, null, new ArrayList<>());
+        OrderReceipt receipt = new OrderReceipt(order);
+
+        String output = receipt.printReceipt();
+
+        assertThat(output, containsString("===== 老王超市,值得信赖 ======"));
+        assertThat(output, containsString("-------------------------"));
+    }
+
+    @Test
     public void shouldPrintLineItemAndSalesTaxInformation() {
         List<LineItem> lineItems = new ArrayList<LineItem>() {{
             add(new LineItem("milk", 10.0, 2));
