@@ -22,21 +22,17 @@ public class OrderReceipt {
 
         // prints lineItems
         for (LineItem lineItem : order.getLineItems()) {
-            output.append(lineItemInformation(lineItem));
+            output.append(lineItem.lineItemInformation());
         }
 
         output.append("-------------------------\n");
 
         // prints the sales tax
-        output.append("Sales Tax").append('\t').append(order.totalSalesTax());
+        output.append("税额: ").append(order.totalSalesTax()).append("\n");
 
         // print total amount with tax
-        output.append("Total Amount").append('\t').append(order.totalAmountWithTax());
+        output.append("总价: ").append(order.totalAmountWithTax());
 
         return output.toString();
-    }
-
-    private String lineItemInformation(LineItem lineItem) {
-        return String.format("%s\t%.1f\t%s\t%.1f\n", lineItem.getDescription(), lineItem.getPrice(), lineItem.getQuantity(), lineItem.totalAmount());
     }
 }
