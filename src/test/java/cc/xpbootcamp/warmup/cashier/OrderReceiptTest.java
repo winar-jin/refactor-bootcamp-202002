@@ -52,4 +52,23 @@ class OrderReceiptTest {
         assertThat(output, containsString("税额: 6.50\n"));
         assertThat(output, containsString("总价: 71.50"));
     }
+
+    @Test
+    public void shouldPrintLineItemAndSalesTaxInformationWhenCreateDateIsOnWednesday() throws ParseException {
+        List<LineItem> lineItems = new ArrayList<LineItem>() {{
+            add(new LineItem("牛奶", 21.50, 2));
+            add(new LineItem("小白菜", 10.00, 1));
+        }};
+
+        Date createdDate = new SimpleDateFormat("yyyy-MM-dd").parse("2020-02-19");
+        OrderReceipt receipt = new OrderReceipt(new Order(createdDate, lineItems));
+
+        String output = receipt.printReceipt();
+
+        assertThat(output, containsString("牛奶, 21.50 x 2, 43.00\n"));
+        assertThat(output, containsString("小白菜, 10.00 x 1, 10.00\n"));
+        assertThat(output, containsString("税额: 5.30\n"));
+        assertThat(output, containsString("折扣: 1.17\n"));
+        assertThat(output, containsString("总价: 57.13"));
+    }
 }
