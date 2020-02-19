@@ -1,6 +1,7 @@
 package cc.xpbootcamp.warmup.cashier;
 
 import java.math.BigDecimal;
+import java.util.stream.Collectors;
 
 /**
  * OrderReceipt prints the details of order including customer name, address, description, quantity,
@@ -22,9 +23,7 @@ public class OrderReceipt {
 
         output.append(order.createdDate()).append("\n");
 
-        for (LineItem lineItem : order.getLineItems()) {
-            output.append(lineItem.lineItemInformation());
-        }
+        output.append(lineItemsInformation());
 
         output.append("-------------------------\n");
 
@@ -38,5 +37,12 @@ public class OrderReceipt {
         output.append("总价: ").append(String.format("%.2f", order.totalAmountWithTaxAndDiscount()));
 
         return output.toString();
+    }
+
+    private String lineItemsInformation() {
+        return order.getLineItems()
+                    .stream()
+                    .map(LineItem::lineItemInformation)
+                    .collect(Collectors.joining());
     }
 }
