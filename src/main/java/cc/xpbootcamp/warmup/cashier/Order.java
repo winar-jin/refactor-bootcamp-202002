@@ -1,29 +1,31 @@
 package cc.xpbootcamp.warmup.cashier;
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 public class Order {
-    private String customerName;
-    private String address;
     private List<LineItem> lineItems;
+    private Date createdDate;
 
-    public Order(String customerName, String address, List<LineItem> lineItems) {
-        this.customerName = customerName;
-        this.address = address;
+    public Order(Date createdDate, List<LineItem> lineItems) {
         this.lineItems = lineItems;
-    }
-
-    public String getCustomerName() {
-        return customerName;
-    }
-
-    public String getCustomerAddress() {
-        return address;
+        this.createdDate = Objects.nonNull(createdDate) ? createdDate : new Date();
     }
 
     public List<LineItem> getLineItems() {
         return lineItems;
+    }
+
+    public String getCreatedDate() {
+
+        String[] weekDays = {"星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"};
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy年M月dd日");
+
+        return String.format("%s,%s", simpleDateFormat.format(createdDate), weekDays[createdDate.getDay()]);
     }
 
     public BigDecimal totalSalesTax() {

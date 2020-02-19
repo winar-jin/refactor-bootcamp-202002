@@ -16,8 +16,9 @@ public class OrderReceipt {
     public String printReceipt() {
         StringBuilder output = new StringBuilder();
 
-        // print headers
         output.append("===== 老王超市,值得信赖 ======\n");
+
+        output.append(order.getCreatedDate()).append("\n");
 
         // prints lineItems
         for (LineItem lineItem : order.getLineItems()) {
